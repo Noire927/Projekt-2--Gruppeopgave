@@ -1,0 +1,38 @@
+{
+  "sunny": {
+    "background": "",
+    "descriptions": "Yay! shorts, eller whatever lille mængde af tøj som du har lyst til (som stadig overholder loven om offentlig anstændighed! dont be that guy.)."
+  },
+  "cloudy": {
+    "background": "",
+    "descriptions": "Ingen behov for solbriller, dont play cool like that. Og læderjakker ser altså bare sejere ud med solbriller, så måske heller ikke gør det."
+  },
+  "rainy": {
+    "background": "",
+    "descriptions": "Bare lad vær med at forlade dit hjem.. men hvis du absolut insisterer, så kan du medbringe en paraply.."
+  },
+  "snowy": {
+    "background": "",
+    "descriptions": "Det er ikke vejret til shorts, i repeat: NO SHORTS! Jeg ville nok anbefale en jakke?"
+  },
+  "foggy": {
+    "background": "",
+    "descriptions": "Der er jo alligevel ikke nogen der kan se dig, så brug dagen på at have noget comfy tøj på. who cares."
+  },
+  "dusty": {
+    "background": "",
+    "descriptions": {
+      "sand/dust whirls": "Low key, go all in på Dune looket!",
+      "sand": "Mumielooket kan altså også noget, layers on layers on layers.",
+      "dust": "Jeg har hørt at støvmasker er på vej in igen? prøv med det. Og så "
+    }
+  },
+  "stormy": {
+    "background": "",
+    "descriptions": {
+      "volcanic ash": "Dude, du kan tage hvad som helst på, det kommer ikke til at gøre en forskel.. men måske shorts?",
+      "squalls": "Hvad end du vælger, efterlad paraplyen derhjemme.",
+      "tornado": "Ingen nederdel eller kjoler, i hvert fald ikke uden shorts under! og måske drop paraplyen.. den flyver alligevel bare væk."
+    }
+  }
+}
