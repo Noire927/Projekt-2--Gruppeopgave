@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Get the requested file path
+  // Get the file path requested by the browser
   let pathname = req.url;
 
   // Serve index.html when the root address is requested
@@ -65,7 +65,9 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    // Identify the file type using its extension
+    // Identify the file type the browser is getting, so it can be displayed correctly
+    // application/octet-stream is the default for files we dont know the type of
+
     const fileExtension = path.extname(filePath);
     const contentType =
       contentTypes[fileExtension] || "application/octet-stream";
