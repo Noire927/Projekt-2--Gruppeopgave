@@ -35,7 +35,59 @@ const contentTypes = {
 };
 
 // Create the actual HTTP server
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
+  // Handle requests for current weather
+  if (req.method === "GET" && req.url.startsWith("/api/weather")) {
+    const urlParts = req.url.split("?");
+
+    // Check if a city was provided
+    if (!urlParts[1]) {
+      res.writeHead(400, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Please provide a city" }));
+      return;
+    }
+
+    const city = urlParts[1].split("=")[1];
+
+    try {
+      // Request current weather for the specified city
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},DK&units=metric&appid=${WEATHER_API_KEY}`,
+      );
+
+      // Check if the request was successful
+      if (!response.ok) {
+        res.writeHead(response.status, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Could not retrieve weather data" }));
+        return;
+      }
+
+      // Convert the response into a JavaScript object
+      const weatherData = await response.json();
+
+      // Send the weather data back to the browser
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify(weatherData));
+    } catch (error) {
+      res.writeHead(500, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Could not retrieve weather data" }));
+    }
+
+    return;
+  }
+
   // Handle requests for clothing recommendations
   if (req.method === "GET" && req.url === "/api/clothing") {
     res.writeHead(200, {
@@ -43,6 +95,58 @@ const server = http.createServer((req, res) => {
     });
 
     res.end(JSON.stringify(weather));
+    return;
+  }
+
+  // Handle requests for weather forecasts
+  if (req.method === "GET" && req.url.startsWith("/api/forecast")) {
+    const urlParts = req.url.split("?");
+
+    // Check if a city was provided
+    if (!urlParts[1]) {
+      res.writeHead(400, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Please provide a city" }));
+      return;
+    }
+
+    const city = urlParts[1].split("=")[1];
+
+    try {
+      // Request the weather forecast for the specified city
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)},DK&units=metric&appid=${WEATHER_API_KEY}`,
+      );
+
+      // Check if the request was successful
+      if (!response.ok) {
+        res.writeHead(response.status, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Could not retrieve forecast data" }));
+        return;
+      }
+
+      // Convert the response into a JavaScript object
+      const forecastData = await response.json();
+
+      // Send the forecast data back to the browser
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify(forecastData));
+    } catch (error) {
+      res.writeHead(500, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Could not retrieve forecast data" }));
+    }
+
     return;
   }
 
