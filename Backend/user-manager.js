@@ -27,6 +27,26 @@ class UserManager {
     );
   }
 
+  // Find a user by ID
+  findById(userId) {
+    return this.users.find((user) => user.id === userId);
+  }
+
+  // Update a user's preferences
+  updatePreferences(userId, preferences) {
+    const user = this.users.find((user) => user.id === userId);
+
+    if (!user) {
+      return false;
+    }
+
+    user.preferences = preferences;
+
+    this.saveUsers();
+
+    return true;
+  }
+
   // Save users to the JSON file
   saveUsers() {
     fs.writeFileSync(this.usersFile, JSON.stringify(this.users, null, 2));

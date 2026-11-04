@@ -186,24 +186,11 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for current weather
   if (req.method === "GET" && req.url.startsWith("/api/weather")) {
-    // Get the login token from the request header
-    const authHeader = req.headers.authorization;
-    const token = authHeader?.split(" ")[1];
-
-    // Verify the login token
-    if (!authentication.verifyToken(token)) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
-
-      res.end(JSON.stringify({ error: "Unauthorized" }));
-      return;
-    }
-
-    const urlParts = req.url.split("?");
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const city = url.searchParams.get("city");
 
     // Check if a city was provided
-    if (!urlParts[1]) {
+    if (!city) {
       res.writeHead(400, {
         "Content-Type": "application/json",
       });
@@ -211,8 +198,6 @@ const server = http.createServer(async (req, res) => {
       res.end(JSON.stringify({ error: "Please provide a city" }));
       return;
     }
-
-    const city = urlParts[1].split("=")[1];
 
     try {
       // Request current weather for the city provided by the user
@@ -251,51 +236,40 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Handle requests for clothing recommendations
-  if (req.method === "GET" && req.url === "/api/clothing") {
+  if (req.method === "GET" && req.url.startsWith("/api/clothing")) {
     // Get the login token from the request header
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(" ")[1];
 
-    // Verify the login token
-    if (!authentication.verifyToken(token)) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
+    // Set the default clothing preferences
+    let preferences = {
+      ageGroup: "voksen",
+      gender: "ved ikke",
+      style: "classy",
+    };
 
-      res.end(JSON.stringify({ error: "Unauthorized" }));
-      return;
-    }
+    // Check if the user is logged in
+    if (authentication.verifyToken(token)) {
+      // Get the user associated with the login token
+      const userId = authentication.getUserId(token);
+      const user = userManager.findById(userId);
 
-    // Return clothing recommendations
-    res.writeHead(200, {
-      "Content-Type": "application/json",
-    });
-
-    res.end(JSON.stringify(weather));
-    return;
-  }
-
-  // Handle requests for weather forecasts
-  if (req.method === "GET" && req.url.startsWith("/api/forecast")) {
-    // Get the login token from the request header
-    const authHeader = req.headers.authorization;
-    const token = authHeader?.split(" ")[1];
-
-    // Verify the login token
-    if (!authentication.verifyToken(token)) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
-
-      res.end(JSON.stringify({ error: "Unauthorized" }));
-      return;
+      // Get the user's saved preferences
+      if (user && user.preferences) {
+        preferences = {
+          ageGroup: user.preferences.ageGroup || "voksen",
+          gender: user.preferences.gender || "ved ikke",
+          style: user.preferences.style || "classy",
+        };
+      }
     }
 
     // Get the city from the URL
-    const urlParts = req.url.split("?");
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const city = url.searchParams.get("city");
 
     // Check if a city was provided
-    if (!urlParts[1]) {
+    if (!city) {
       res.writeHead(400, {
         "Content-Type": "application/json",
       });
@@ -304,7 +278,123 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    const city = urlParts[1].split("=")[1];
+    try {
+      // Request current weather for the specified city
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},DK&units=metric&appid=${WEATHER_API_KEY}`,
+      );
+
+      // Check if the request was successful
+      if (!response.ok) {
+        res.writeHead(response.status, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Could not retrieve weather data" }));
+        return;
+      }
+
+      // Convert the response into a JavaScript object
+      const weatherData = await response.json();
+
+      // Get the weather condition ID
+      const weatherId = weatherData.weather[0].id;
+
+      // Match the weather condition to a category in weather.json
+      let weatherCategory;
+
+      if (weatherId === 800) {
+        weatherCategory = "sunny";
+      } else if (weatherId >= 801 && weatherId <= 804) {
+        weatherCategory = "cloudy";
+      } else if (
+        (weatherId >= 300 && weatherId <= 321) ||
+        (weatherId >= 500 && weatherId <= 531)
+      ) {
+        weatherCategory = "rainy";
+      } else if (weatherId >= 600 && weatherId <= 622) {
+        weatherCategory = "snowy";
+      } else if ([701, 711, 721, 741].includes(weatherId)) {
+        weatherCategory = "foggy";
+      } else if ([731, 751, 761, 762].includes(weatherId)) {
+        weatherCategory = "dusty";
+      } else if (
+        (weatherId >= 200 && weatherId <= 232) ||
+        weatherId === 771 ||
+        weatherId === 781
+      ) {
+        weatherCategory = "stormy";
+      }
+
+      // Check if the weather condition has a matching category
+      if (!weatherCategory) {
+        res.writeHead(400, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Unsupported weather condition" }));
+        return;
+      }
+
+      // Find the clothing recommendation matching the weather and user preferences
+      const recommendation =
+        weather[weatherCategory].descriptions[preferences.ageGroup]?.[
+          preferences.gender
+        ]?.[preferences.style];
+
+      // Check if a matching recommendation exists
+      if (!recommendation) {
+        res.writeHead(400, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(
+          JSON.stringify({
+            error: "Could not find a matching clothing recommendation",
+          }),
+        );
+        return;
+      }
+
+      // Return the clothing recommendation
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(
+        JSON.stringify({
+          category: weatherCategory,
+          recommendation: recommendation,
+        }),
+      );
+    } catch (error) {
+      res.writeHead(500, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(
+        JSON.stringify({ error: "Could not retrieve clothing recommendation" }),
+      );
+    }
+
+    return;
+  }
+
+  // Handle requests for weather forecasts
+  if (req.method === "GET" && req.url.startsWith("/api/forecast")) {
+    // Get the city from the URL
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const city = url.searchParams.get("city");
+
+    // Check if a city was provided
+    if (!city) {
+      res.writeHead(400, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Please provide a city" }));
+      return;
+    }
 
     try {
       // Request the weather forecast for the specified city
@@ -338,6 +428,94 @@ const server = http.createServer(async (req, res) => {
 
       res.end(JSON.stringify({ error: "Could not retrieve forecast data" }));
     }
+
+    return;
+  }
+
+  // Handle requests for user preferences
+  if (req.method === "GET" && req.url === "/api/preferences") {
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
+
+    // Verify the login token
+    if (!authentication.verifyToken(token)) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    // Find the user associated with the login token
+    const userId = authentication.getUserId(token);
+    const user = userManager.findById(userId);
+
+    // Return the user's preferences
+    res.writeHead(200, {
+      "Content-Type": "application/json",
+    });
+
+    res.end(JSON.stringify(user.preferences || {}));
+    return;
+  }
+
+  // Handle requests to save user preferences
+  if (req.method === "POST" && req.url === "/api/preferences") {
+    // Get the login token from the request header
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
+
+    // Verify the login token
+    if (!authentication.verifyToken(token)) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    let body = "";
+
+    // Receive incoming data
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
+
+    // Process the data when the request is complete
+    req.on("end", () => {
+      try {
+        const preferences = JSON.parse(body);
+
+        // Get the user ID associated with the login token
+        const userId = authentication.getUserId(token);
+
+        // Save the user's preferences
+        const updated = userManager.updatePreferences(userId, preferences);
+
+        if (!updated) {
+          res.writeHead(404, {
+            "Content-Type": "application/json",
+          });
+
+          res.end(JSON.stringify({ error: "User not found" }));
+          return;
+        }
+
+        res.writeHead(200, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ message: "Preferences saved" }));
+      } catch (error) {
+        res.writeHead(400, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Invalid JSON data" }));
+      }
+    });
 
     return;
   }

@@ -26,6 +26,11 @@ class Authentication {
   verifyToken(token) {
     return this.activeTokens[token] !== undefined;
   }
+
+  // Get the user ID associated with a login token
+  getUserId(token) {
+    return this.activeTokens[token];
+  }
 }
 
 module.exports = Authentication;
