@@ -6,6 +6,8 @@ console.log("Weather API key loaded:", Boolean(WEATHER_API_KEY));
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
+// This is a built-in Node.js module
+const crypto = require("node:crypto");
 
 // Import backend classes
 const User = require("./user");
@@ -24,6 +26,9 @@ const weatherFile = path.join(
 // Load user data and weather data from the JSON files
 const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
 const weather = JSON.parse(fs.readFileSync(weatherFile, "utf8"));
+
+// Store active login tokens
+const activeTokens = {};
 
 // Define the server port
 const port = 3000;
@@ -95,6 +100,7 @@ const server = http.createServer(async (req, res) => {
           res.end(JSON.stringify({ error: "User already exists" }));
           return;
         }
+
         userData.id = users.length + 1;
         const user = new User(userData);
         users.push(user);
@@ -117,9 +123,114 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Handle user login
+  if (req.method === "POST" && req.url === "/api/login") {
+    let body = "";
+
+    // Receive incoming data
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
+
+    // Process the data when the request is complete
+    req.on("end", () => {
+      try {
+        const loginData = JSON.parse(body);
+
+        // Check if email and password were provided
+        if (!loginData.email || !loginData.password) {
+          res.writeHead(400, {
+            "Content-Type": "application/json",
+          });
+
+          res.end(JSON.stringify({ error: "Email and password are required" }));
+          return;
+        }
+
+        // Convert the email address to lowercase
+        loginData.email = loginData.email.toLowerCase();
+
+        // Find the user by email
+        const existingUser = users.find(
+          (user) => user.email === loginData.email,
+        );
+
+        // Check if the user exists
+        if (!existingUser) {
+          res.writeHead(401, {
+            "Content-Type": "application/json",
+          });
+
+          res.end(JSON.stringify({ error: "Invalid email or password" }));
+          return;
+        }
+
+        // Check if the password is correct
+        if (loginData.password !== existingUser.password) {
+          res.writeHead(401, {
+            "Content-Type": "application/json",
+          });
+
+          res.end(JSON.stringify({ error: "Invalid email or password" }));
+          return;
+        }
+
+        // Generate a login token using the built-in crypto module
+        const token = crypto.randomBytes(32).toString("hex");
+        activeTokens[token] = existingUser.id;
+
+        // Send the token to the frontend
+        res.writeHead(200, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(
+          JSON.stringify({
+            message: "Login successful",
+            token: token,
+          }),
+        );
+      } catch (error) {
+        res.writeHead(400, {
+          "Content-Type": "application/json",
+        });
+
+        res.end(JSON.stringify({ error: "Invalid JSON data" }));
+      }
+    });
+
+    return;
+  }
+
   // Handle requests for current weather
   if (req.method === "GET" && req.url.startsWith("/api/weather")) {
     const urlParts = req.url.split("?");
+
+    // Get the token from the Authorization header
+    const authHeader = req.headers.authorization;
+
+    // Check if the token exists
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    // Extract the actual token
+    const token = authHeader.split(" ")[1];
+
+    // Check if the token belongs to a logged-in user
+    if (!activeTokens[token]) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Invalid token" }));
+      return;
+    }
 
     // Check if a city was provided
     if (!urlParts[1]) {
@@ -171,6 +282,33 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for clothing recommendations
   if (req.method === "GET" && req.url === "/api/clothing") {
+    // Get the token from the Authorization header
+    const authHeader = req.headers.authorization;
+
+    // Check if the token exists
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    // Extract the actual token
+    const token = authHeader.split(" ")[1];
+
+    // Check if the token belongs to a logged-in user
+    if (!activeTokens[token]) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Invalid token" }));
+      return;
+    }
+
+    // Return clothing recommendations
     res.writeHead(200, {
       "Content-Type": "application/json",
     });
@@ -181,6 +319,33 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for weather forecasts
   if (req.method === "GET" && req.url.startsWith("/api/forecast")) {
+    // Get the token from the Authorization header
+    const authHeader = req.headers.authorization;
+
+    // Check if the token exists
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    // Extract the actual token
+    const token = authHeader.split(" ")[1];
+
+    // Check if the token belongs to a logged-in user
+    if (!activeTokens[token]) {
+      res.writeHead(401, {
+        "Content-Type": "application/json",
+      });
+
+      res.end(JSON.stringify({ error: "Invalid token" }));
+      return;
+    }
+
+    // Get the city from the URL
     const urlParts = req.url.split("?");
 
     // Check if a city was provided
@@ -255,7 +420,7 @@ const server = http.createServer(async (req, res) => {
     const contentType =
       contentTypes[fileExtension] || "application/octet-stream";
 
-    // Send the file with its corresponding content type
+    // Send the file with the corresponding content type
     res.writeHead(200, {
       "Content-Type": contentType,
     });
