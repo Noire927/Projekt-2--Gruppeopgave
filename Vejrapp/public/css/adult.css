@@ -1,0 +1,37 @@
+:root{
+    
+    --font-body:"Inter",system-ui,sans-serif;--font-heading:"Inter",system-ui,sans-serif
+}
+.title{
+    font-weight:300
+}
+.header__title{
+    font:300 2.2rem/1.2 var(--font-heading)
+}
+.current{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center
+}
+.current__image{
+    width:100%;aspect-ratio:1;border-radius:12px;background:var(--color-grey);object-fit:contain
+}
+.current__city{
+    margin:0;color:var(--color-muted)
+}
+.current__temp{
+    margin:0;font-size:2.2rem;font-weight:300;line-height:1.1
+}
+.current__condition{
+    margin:0;font-size:1.8rem;font-weight:300
+}
+.stats__item{
+    border-top:2px solid var(--color-ink)
+}
+.advice__label{
+    margin:0;color:var(--color-muted);font-size:.9rem
+}
+.advice__text{
+    margin:4px 0 0;font-size:1.5rem;font-weight:500;line-height:1.3
+}
+.swipe__action{
+    width:56px;height:56px;font-weight:400
+}
