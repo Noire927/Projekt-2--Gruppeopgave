@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vælg tøj - Klædt på</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/child.css">
+</head>
+<body>
+    <main class="screen screen--child">
+        <a class="back-link" href="profile.html">‹ Tilbage</a>
+        <h1 class="title">Hej <span class="js-user-name">[NAVN]</span>! Hvad kan du lide at have på?</h1>
+        <p class="subtitle">Swipe til højre, hvis du kan lide tøjet. Swipe til venstre, hvis du ikke gør.</p>
+        <section class="swipe js-swipe" data-next="weather-child.html" aria-label="Vælg tøj">
+            <div class="swipe__deck">
+                <article class="swipe__card swipe__card--current" data-category="pants" data-item-id="pants-1">
+                    <img class="swipe__image" src="images/clothing/pants-1.jpg" alt="Bukser" width="300" height="300">
+                    <p class="swipe__caption">Bukser</p>
+                </article>
+                <article class="swipe__card" data-category="sweater" data-item-id="sweater-1">
+                    <img class="swipe__image" src="images/clothing/sweater-1.jpg" alt="Trøje" width="300" height="300">
+                    <p class="swipe__caption">Trøje</p>
+                </article>
+                <article class="swipe__card" data-category="jacket" data-item-id="jacket-1">
+                    <img class="swipe__image" src="images/clothing/jacket-1.jpg" alt="Jakke" width="300" height="300">
+                    <p class="swipe__caption">Jakke</p>
+                </article>
+                <article class="swipe__card" data-category="shoes" data-item-id="shoes-1">
+                    <img class="swipe__image" src="images/clothing/shoes-1.jpg" alt="Sko" width="300" height="300">
+                    <p class="swipe__caption">Sko</p>
+                </article>
+                <article class="swipe__card" data-category="hat" data-item-id="hat-1">
+                    <img class="swipe__image" src="images/clothing/hat-1.jpg" alt="Hue" width="300" height="300">
+                    <p class="swipe__caption">Hue</p>
+                </article>
+            </div>
+            <div class="swipe__controls">
+                <button class="swipe__action swipe__action--dislike" type="button" data-action="dislike"><span aria-hidden="true">👎</span><span class="swipe__label">Nej tak</span></button>
+                <p class="swipe__counter"><span class="js-swipe-counter">1</span> / 5</p>
+                <button class="swipe__action swipe__action--like" type="button" data-action="like"><span aria-hidden="true">👍</span><span class="swipe__label">Ja tak!</span></button>
+            </div>
+        </section>
+        <a class="link" href="weather-child.html">Spring over</a>
+    </main>
+<script src="js/demo.js" defer></script>
+</body>
+</html>
