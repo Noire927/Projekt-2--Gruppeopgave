@@ -2,15 +2,14 @@
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 console.log("Weather API key loaded:", Boolean(WEATHER_API_KEY));
 
-// Import Node.js tools that are already included in the installed Node.js version
+// Import Node.js tools
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
-// This is a built-in Node.js module
-const crypto = require("node:crypto");
 
 // Import backend classes
-const User = require("./user");
+const UserManager = require("./user-manager");
+const Authentication = require("./authentication");
 
 // Define paths to the frontend and JSON data files
 const publicFolder = path.join(__dirname, "..", "Vejrapp", "public");
@@ -27,8 +26,11 @@ const weatherFile = path.join(
 const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
 const weather = JSON.parse(fs.readFileSync(weatherFile, "utf8"));
 
-// Store active login tokens
-const activeTokens = {};
+// Create the user manager
+const userManager = new UserManager(users, usersFile);
+
+// Create authentication
+const authentication = new Authentication(userManager);
 
 // Define the server port
 const port = 3000;
@@ -88,9 +90,7 @@ const server = http.createServer(async (req, res) => {
         }
 
         // Check if the email is already registered
-        const existingUser = users.find(
-          (user) => user.email.toLowerCase() === userData.email,
-        );
+        const existingUser = userManager.findByEmail(userData.email);
 
         if (existingUser) {
           res.writeHead(400, {
@@ -101,10 +101,8 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        userData.id = users.length + 1;
-        const user = new User(userData);
-        users.push(user);
-        fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+        // Register the new user
+        userManager.addUser(userData);
 
         res.writeHead(200, {
           "Content-Type": "application/json",
@@ -150,13 +148,11 @@ const server = http.createServer(async (req, res) => {
         // Convert the email address to lowercase
         loginData.email = loginData.email.toLowerCase();
 
-        // Find the user by email
-        const existingUser = users.find(
-          (user) => user.email === loginData.email,
-        );
+        // Authenticate the user and generate a login token
+        const token = authentication.login(loginData.email, loginData.password);
 
-        // Check if the user exists
-        if (!existingUser) {
+        // Check if the login was successful
+        if (!token) {
           res.writeHead(401, {
             "Content-Type": "application/json",
           });
@@ -164,20 +160,6 @@ const server = http.createServer(async (req, res) => {
           res.end(JSON.stringify({ error: "Invalid email or password" }));
           return;
         }
-
-        // Check if the password is correct
-        if (loginData.password !== existingUser.password) {
-          res.writeHead(401, {
-            "Content-Type": "application/json",
-          });
-
-          res.end(JSON.stringify({ error: "Invalid email or password" }));
-          return;
-        }
-
-        // Generate a login token using the built-in crypto module
-        const token = crypto.randomBytes(32).toString("hex");
-        activeTokens[token] = existingUser.id;
 
         // Send the token to the frontend
         res.writeHead(200, {
@@ -204,13 +186,12 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for current weather
   if (req.method === "GET" && req.url.startsWith("/api/weather")) {
-    const urlParts = req.url.split("?");
-
-    // Get the token from the Authorization header
+    // Get the login token from the request header
     const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
 
-    // Check if the token exists
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // Verify the login token
+    if (!authentication.verifyToken(token)) {
       res.writeHead(401, {
         "Content-Type": "application/json",
       });
@@ -219,18 +200,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // Extract the actual token
-    const token = authHeader.split(" ")[1];
-
-    // Check if the token belongs to a logged-in user
-    if (!activeTokens[token]) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
-
-      res.end(JSON.stringify({ error: "Invalid token" }));
-      return;
-    }
+    const urlParts = req.url.split("?");
 
     // Check if a city was provided
     if (!urlParts[1]) {
@@ -282,29 +252,17 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for clothing recommendations
   if (req.method === "GET" && req.url === "/api/clothing") {
-    // Get the token from the Authorization header
+    // Get the login token from the request header
     const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
 
-    // Check if the token exists
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // Verify the login token
+    if (!authentication.verifyToken(token)) {
       res.writeHead(401, {
         "Content-Type": "application/json",
       });
 
       res.end(JSON.stringify({ error: "Unauthorized" }));
-      return;
-    }
-
-    // Extract the actual token
-    const token = authHeader.split(" ")[1];
-
-    // Check if the token belongs to a logged-in user
-    if (!activeTokens[token]) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
-
-      res.end(JSON.stringify({ error: "Invalid token" }));
       return;
     }
 
@@ -319,29 +277,17 @@ const server = http.createServer(async (req, res) => {
 
   // Handle requests for weather forecasts
   if (req.method === "GET" && req.url.startsWith("/api/forecast")) {
-    // Get the token from the Authorization header
+    // Get the login token from the request header
     const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
 
-    // Check if the token exists
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // Verify the login token
+    if (!authentication.verifyToken(token)) {
       res.writeHead(401, {
         "Content-Type": "application/json",
       });
 
       res.end(JSON.stringify({ error: "Unauthorized" }));
-      return;
-    }
-
-    // Extract the actual token
-    const token = authHeader.split(" ")[1];
-
-    // Check if the token belongs to a logged-in user
-    if (!activeTokens[token]) {
-      res.writeHead(401, {
-        "Content-Type": "application/json",
-      });
-
-      res.end(JSON.stringify({ error: "Invalid token" }));
       return;
     }
 
