@@ -240,17 +240,19 @@ const server = http.createServer(async (req, res) => {
   if (req.method === "GET" && req.url.startsWith("/api/clothing")) {
     // Get the login token from the request header
     const authHeader = req.headers.authorization;
-    const token = authHeader?.split(" ")[1];
+    const token = authHeader?.startsWith("Bearer ")
+      ? authHeader.slice(7)
+      : null;
 
-    // Set the default clothing preferences
+    // Set the default clothing preferences for guests
     let preferences = {
       ageGroup: "voksen",
-      gender: "ved ikke",
+      gender: "other",
       style: "classy",
     };
 
     // Check if the user is logged in
-    if (authentication.verifyToken(token)) {
+    if (token && authentication.verifyToken(token)) {
       // Get the user associated with the login token
       const userId = authentication.getUserId(token);
       const user = userManager.findById(userId);
