@@ -1,110 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vejret - Klædt på</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/adult.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/adult.css" />
+  </head>
+  <body>
     <main class="screen screen--adult">
-        <header class="header">
-            <h1 class="header__title">Klædt på</h1>
-        </header>
-        <form class="search js-search-form" role="search">
-            <label class="visually-hidden" for="city-input">Søg efter by</label>
-            <input class="search__input" id="city-input" name="city" type="search" placeholder="Søg efter by" autocomplete="off">
-            <button class="search__locate js-locate" id="locate-button" type="button"><span aria-hidden="true">📍</span> Find mig</button>
-        </form>
-        <section class="current" aria-live="polite" aria-label="Vejret nu">
-            <img class="current__image" id="weather-image" src="images/weather-sunny.jpg" alt="Tegning af solen" width="180" height="180">
-            <div class="current__info">
-                <p class="current__city" id="city-name">Odense</p>
-                <p class="current__temp" id="temperature">15,6 °C</p>
-                <p class="current__condition" id="condition">Solrig</p>
-            </div>
-        </section>
-        <ul class="stats">
-            <li class="stats__item"><span class="stats__label">Føles som</span><span class="stats__value" id="feels-like">14,2 °C</span></li>
-            <li class="stats__item"><span class="stats__label">Vind</span><span class="stats__value" id="wind">9,4 km/t</span></li>
-            <li class="stats__item"><span class="stats__label">Regn</span><span class="stats__value" id="rain">0 mm</span></li>
+      <header class="header">
+        <h1 class="header__title">Klædt på</h1>
+      </header>
+      <form class="search js-search-form" role="search">
+        <label class="visually-hidden" for="city-input">Søg efter by</label>
+        <input
+          class="search__input"
+          id="city-input"
+          name="city"
+          type="search"
+          placeholder="Søg efter by"
+          autocomplete="off"
+        />
+        <button
+          class="search__locate js-locate"
+          id="locate-button"
+          type="button"
+        >
+          <span aria-hidden="true">📍</span> Find mig
+        </button>
+      </form>
+      <section class="current" aria-live="polite" aria-label="Vejret nu">
+        <img
+          class="current__image"
+          id="weather-image"
+          src="images/weather-sunny.jpg"
+          alt="Tegning af solen"
+          width="180"
+          height="180"
+        />
+        <div class="current__info">
+          <p class="current__city" id="city-name">Odense</p>
+          <p class="current__temp" id="temperature">15,6 °C</p>
+          <p class="current__condition" id="condition">Solrig</p>
+        </div>
+      </section>
+      <ul class="stats">
+        <li class="stats__item">
+          <span class="stats__label">Føles som</span
+          ><span class="stats__value" id="feels-like">14,2 °C</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__label">Vind</span
+          ><span class="stats__value" id="wind">9,4 km/t</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__label">Regn</span
+          ><span class="stats__value" id="rain">0 mm</span>
+        </li>
+      </ul>
+      <section class="advice" aria-label="Tøjråd">
+        <p class="advice__label">Hvad skal man have på?</p>
+        <p class="advice__text" id="advice-text">
+          Tag en jakke eller en trøje på.
+        </p>
+      </section>
+      <section class="forecast" aria-label="Vejrudsigt">
+        <input
+          class="forecast__radio"
+          type="radio"
+          name="forecast-view"
+          id="view-daily"
+          checked
+        />
+        <input
+          class="forecast__radio"
+          type="radio"
+          name="forecast-view"
+          id="view-hourly"
+        />
+        <div class="forecast__tabs">
+          <label class="forecast__tab" for="view-daily">5-dages prognose</label>
+          <label class="forecast__tab" for="view-hourly">Time for time</label>
+        </div>
+        <ul class="forecast__list forecast__list--daily" id="forecast-daily">
+          <li class="forecast__item">
+            <span class="forecast__day">Onsdag 4.11</span>
+            <span class="forecast__temp">15,6 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Solrig"
+              >☀️</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">Torsdag 5.11</span>
+            <span class="forecast__temp">13,2 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Delvist skyet"
+              >⛅</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">Fredag 6.11</span>
+            <span class="forecast__temp">10,8 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Regn">🌧️</span>
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">Lørdag 7.11</span>
+            <span class="forecast__temp">9,5 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Regn">🌧️</span>
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">Søndag 8.11</span>
+            <span class="forecast__temp">11,0 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Overskyet"
+              >☁️</span
+            >
+          </li>
         </ul>
-        <section class="advice" aria-label="Tøjråd">
-            <p class="advice__label">Hvad skal man have på?</p>
-            <p class="advice__text" id="advice-text">Tag en jakke eller en trøje på.</p>
-        </section>
-        <section class="forecast" aria-label="Vejrudsigt">
-            <input class="forecast__radio" type="radio" name="forecast-view" id="view-daily" checked>
-            <input class="forecast__radio" type="radio" name="forecast-view" id="view-hourly">
-            <div class="forecast__tabs">
-                <label class="forecast__tab" for="view-daily">5-dages prognose</label>
-                <label class="forecast__tab" for="view-hourly">Time for time</label>
-            </div>
-            <ul class="forecast__list forecast__list--daily" id="forecast-daily">
-                <li class="forecast__item">
-                    <span class="forecast__day">Onsdag 4.11</span>
-                    <span class="forecast__temp">15,6 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Solrig">☀️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">Torsdag 5.11</span>
-                    <span class="forecast__temp">13,2 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Delvist skyet">⛅</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">Fredag 6.11</span>
-                    <span class="forecast__temp">10,8 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Regn">🌧️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">Lørdag 7.11</span>
-                    <span class="forecast__temp">9,5 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Regn">🌧️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">Søndag 8.11</span>
-                    <span class="forecast__temp">11,0 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Overskyet">☁️</span>
-                </li>
-            </ul>
-            <ul class="forecast__list forecast__list--hourly" id="forecast-hourly">
-                <li class="forecast__item">
-                    <span class="forecast__day">Nu</span>
-                    <span class="forecast__temp">15,6 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Solrig">☀️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">15:00</span>
-                    <span class="forecast__temp">16,1 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Solrig">☀️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">16:00</span>
-                    <span class="forecast__temp">15,2 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Delvist skyet">⛅</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">17:00</span>
-                    <span class="forecast__temp">13,9 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Delvist skyet">⛅</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">18:00</span>
-                    <span class="forecast__temp">12,4 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Overskyet">☁️</span>
-                </li>
-                <li class="forecast__item">
-                    <span class="forecast__day">19:00</span>
-                    <span class="forecast__temp">11,8 °C</span>
-                    <span class="forecast__icon" role="img" aria-label="Overskyet">☁️</span>
-                </li>
-            </ul>
-        </section>
+        <ul class="forecast__list forecast__list--hourly" id="forecast-hourly">
+          <li class="forecast__item">
+            <span class="forecast__day">Nu</span>
+            <span class="forecast__temp">15,6 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Solrig"
+              >☀️</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">15:00</span>
+            <span class="forecast__temp">16,1 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Solrig"
+              >☀️</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">16:00</span>
+            <span class="forecast__temp">15,2 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Delvist skyet"
+              >⛅</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">17:00</span>
+            <span class="forecast__temp">13,9 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Delvist skyet"
+              >⛅</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">18:00</span>
+            <span class="forecast__temp">12,4 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Overskyet"
+              >☁️</span
+            >
+          </li>
+          <li class="forecast__item">
+            <span class="forecast__day">19:00</span>
+            <span class="forecast__temp">11,8 °C</span>
+            <span class="forecast__icon" role="img" aria-label="Overskyet"
+              >☁️</span
+            >
+          </li>
+        </ul>
+      </section>
     </main>
-<script src="js/demo.js" defer></script>
-</body>
+  </body>
 </html>
