@@ -1,11 +1,12 @@
-// Load the API key from the .env file
-const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-console.log("Weather API key loaded:", Boolean(WEATHER_API_KEY));
-
 // Import Node.js tools
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
+
+// Load the API key from the .env file
+process.loadEnvFile(path.join(__dirname, ".env"));
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+console.log("Weather API key loaded:", Boolean(WEATHER_API_KEY));
 
 // Import backend classes
 const UserManager = require("./user-manager");
