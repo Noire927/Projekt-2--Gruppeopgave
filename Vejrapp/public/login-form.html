@@ -1,32 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Log ind - Klædt på</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+  </head>
+  <body>
     <main class="screen screen--start">
-        <a class="back-link" href="login.html">‹ Tilbage</a>
-        <h1 class="title">Log ind</h1>
-        <form class="form js-login-form" id="login-form" method="post" action="/api/login" data-next="weather-adult.html">
-            <div class="form__field">
-                <label class="form__label" for="email">E-mail</label>
-                <input class="form__input" id="email" name="email" type="email" autocomplete="email" placeholder="navn@eksempel.dk" required>
-            </div>
-            <div class="form__field">
-                <label class="form__label" for="password">Kodeord</label>
-                <input class="form__input" id="password" name="password" type="password" autocomplete="current-password" required>
-            </div>
-            <p id="auth-message" role="alert"></p>
-            <button class="button" type="submit">Log ind</button>
-        </form>
-        <a class="link" href="signup.html">Har du ikke en bruger? Opret bruger</a>
+      <a class="back-link" href="login.html">‹ Tilbage</a>
+      <h1 class="title">Log ind</h1>
+      <form
+        class="form js-login-form"
+        id="login-form"
+        method="post"
+        action="/api/login"
+        data-next="weather-adult.html"
+      >
+        <div class="form__field">
+          <label class="form__label" for="email">E-mail</label>
+          <input
+            class="form__input"
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="navn@eksempel.dk"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label class="form__label" for="password">Kodeord</label>
+          <input
+            class="form__input"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <p id="auth-message" role="alert"></p>
+        <button class="button" type="submit">Log ind</button>
+        <a class="button button--secondary" href="weather-adult.html"
+          >Fortsæt som gæst</a
+        >
+      </form>
+      <a class="link" href="signup.html">Har du ikke en bruger? Opret bruger</a>
     </main>
-<script src="js/authentication.js" defer></script>
-</body>
+    <script src="js/authentication.js" defer></script>
+  </body>
 </html>
