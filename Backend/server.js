@@ -236,6 +236,49 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Handle coordinate requests from location.js.
+  if (req.method === "GET" && req.url.startsWith("/api/location?")) {
+    // Read the coordinates from the request.
+    const url = new URL(req.url, "http://localhost");
+    const lat = Number(url.searchParams.get("lat")?.trim() || NaN);
+    const lon = Number(url.searchParams.get("lon")?.trim() || NaN);
+
+    res.setHeader("Content-Type", "application/json");
+
+    // Reject missing or invalid coordinates.
+    if (
+      !Number.isFinite(lat) ||
+      Math.abs(lat) > 90 ||
+      !Number.isFinite(lon) ||
+      Math.abs(lon) > 180
+    ) {
+      res.statusCode = 400;
+      res.end(JSON.stringify({ error: "Invalid coordinates" }));
+      return;
+    }
+
+    try {
+      // Ask OpenWeather for the nearest city.
+      const response = await fetch(
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_API_KEY}`,
+      );
+      const cities = await response.json();
+
+      if (!response.ok || !cities[0]?.name) {
+        throw new Error("City lookup failed");
+      }
+
+      // Return the city name expected by location.js.
+      res.end(JSON.stringify({ city: cities[0].name }));
+    } catch {
+      // Return an error if the lookup fails.
+      res.statusCode = 502;
+      res.end(JSON.stringify({ error: "Could not find a city" }));
+    }
+
+    return; // Stop before the static-file handler.
+  }
+
   // Handle requests for clothing recommendations
   if (req.method === "GET" && req.url.startsWith("/api/clothing")) {
     // Get the login token from the request header
