@@ -249,7 +249,27 @@ const server = http.createServer(async (req, res) => {
       ageGroup: "voksen",
       gender: "other",
       style: "classy",
+      likedClothes: [],
+      dislikedClothes: [],
     };
+
+    // Check if the user is logged in
+    if (token && authentication.verifyToken(token)) {
+      // Get the user associated with the login token
+      const userId = authentication.getUserId(token);
+      const user = userManager.findById(userId);
+
+      // Get the user's saved preferences
+      if (user && user.preferences) {
+        preferences = {
+          ...preferences,
+          ...user.preferences,
+          ageGroup: user.preferences.ageGroup || "voksen",
+          gender: user.preferences.gender || "other",
+          style: user.preferences.style || "classy",
+        };
+      }
+    }
 
     // Check if the user is logged in
     if (token && authentication.verifyToken(token)) {
@@ -359,6 +379,44 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
+      // Give clothing IDs readable names
+      const clothingNames = {
+        "pants-1": "bukser",
+        "sweater-1": "trøjer",
+        "jacket-1": "jakker",
+        "shoes-1": "sko",
+        "hat-1": "huer",
+      };
+
+      // Find the names of liked and disliked clothes
+      const likedClothes = (preferences.likedClothes || [])
+        .map((item) => clothingNames[item])
+        .filter(Boolean);
+
+      const dislikedClothes = (preferences.dislikedClothes || [])
+        .map((item) => clothingNames[item])
+        .filter(Boolean);
+
+      // Create a personalised note
+      let personalizedNote = "";
+
+      if (likedClothes.length > 0) {
+        personalizedNote +=
+          "Du kan overveje at bruge noget af det tøj, du har liket: " +
+          likedClothes.join(", ") +
+          ". ";
+      }
+
+      if (dislikedClothes.length > 0) {
+        personalizedNote +=
+          "Vi tager hensyn til dit fravalg af: " +
+          dislikedClothes.join(", ") +
+          ".";
+      }
+
+      // Combine the original recommendation with the personalised note
+      const finalRecommendation = recommendation + " " + personalizedNote;
+
       // Return the clothing recommendation
       res.writeHead(200, {
         "Content-Type": "application/json",
@@ -367,10 +425,11 @@ const server = http.createServer(async (req, res) => {
       res.end(
         JSON.stringify({
           category: weatherCategory,
-          recommendation: recommendation,
+          recommendation: finalRecommendation,
         }),
       );
     } catch (error) {
+      console.error(error);
       res.writeHead(500, {
         "Content-Type": "application/json",
       });
@@ -379,7 +438,6 @@ const server = http.createServer(async (req, res) => {
         JSON.stringify({ error: "Could not retrieve clothing recommendation" }),
       );
     }
-
     return;
   }
 
@@ -402,7 +460,7 @@ const server = http.createServer(async (req, res) => {
     try {
       // Request the weather forecast for the specified city
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)},DK&units=metric&appid=${WEATHER_API_KEY}`,
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)},DK&units=metric&lang=da&appid=${WEATHER_API_KEY}`,
       );
 
       // Check if the request was successful

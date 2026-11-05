@@ -28,5 +28,25 @@
         "jacket-1"
       ]
     }
+  },
+  {
+    "id": 3,
+    "name": "hk406",
+    "email": "gfl@bob.dk",
+    "password": "123123123",
+    "preferences": {
+      "ageGroup": "voksen",
+      "gender": "female",
+      "style": "slutty",
+      "likedClothes": [
+        "pants-1",
+        "sweater-1",
+        "jacket-1",
+        "shoes-1"
+      ],
+      "dislikedClothes": [
+        "hat-1"
+      ]
+    }
   }
 ]
