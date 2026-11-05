@@ -3,29 +3,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor?", 
                 "classy": "Jamen solen skinner og man kan ikke gå galt med et par shorts og en t-shirt, måske med en yndlings disney karakter på? (medmindre det er Peter Plyds, he sucks - og ja disney har lavet en peter plyds film, så det gælder!) "
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her.", 
                 "classy": "Girlie, en sød lille kjole og et par ballarinasko er the easy choice, og så behøver man ikke skulle finde noget der matcher! #lifehack."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. Lad din mor bestemme dit tøj i lidt flere år endnu.", 
                 "classy": "Yay sol! en t-shirt, et par shorts og nogle glitrende solbriller! og hvis det skal være disney themed, så vær mere end velkommen til at vælge noget med Scar, for hvad er mere varmt end socialisme?"
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "Yay! shorts, eller whatever lille mængde af tøj som du har lyst til (som stadig overholder loven om offentlig anstændighed! dont be that guy.).", 
                 "classy": "En helt klassisk skjorte, enten langærmet men med ærmerne smøget op, eller kortærmet og ikke knappet helt op. Til det? Ja så har du nu muligheden for at "
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "Jeg ved godt at mændene gerne må gå rundt i bar overkrop, men husk loven (uanset hvor unfair den er og hvor meget den støtter patriakiet), du er nødt til at tage bare et eller andet på. Men en gennemsigtig t-shirt over en bikini top er fandme tæt på målet girl.", 
                 "classy": "En klassisk sundress kan man ikke gå galt med, men det der virkelig ænderer det er hvad du vælger at parre det med. og vi ved alle at et par hæle immediatly ændrer hele looket! så hvad end du vælger, husk hælene."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "Okay, hear me out, glitter. thats it. glitter. Solen der rammer, det kan jo ikke gå galt.", 
                 "classy": "Idag er dagen til en solhat. Det ændrer hele vibet af hvad end du tager på. Måske vi skal gå lidt country til den?"
             }
@@ -36,29 +36,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor?", 
                 "classy": "Er det tid til at afprøve den der bøllehat? det tror jeg sku nok det er! og hvis du kan sætte den sammen med en trøje eller en skjorte med et meme på, så er alt godt i verden."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her.", 
                 "classy":"Et par leggins med en oversized t-shirt (gerne noget med med et ironisk eller selvironisk budskab, det er altid cool) eller glitter.. glitter fungerer altid. "
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. Lad din mor bestemme dit tøj i lidt flere år endnu.", 
                 "classy": "Oversized t-shirt og en cap, hvad end du parrer det med, så fungerer det. måske et par jeans eller en nederdel?"
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "Det er ikke vejret til shorts, i repeat: NO SHORTS! jeg ved godt du gerne vil vise hud, men tiden er simpelthen ikke til det.", 
                 "classy": "Ingen behov for solbriller, dont play cool like that. Men en læderjakke kunne sagtens gå i det her vejr. lidt slidte jeans oveni, så er vi klar!"
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "Mesh. mesh all the way i det her vejr. en mesh trøje, en kort nederdel og et par støvler der går til knæet. Hvis du også lige har en læderjakke, så er vi go! (og det er måske ikke tøj, men rød læbestift er en del af outfittet)", 
                 "classy": "En tynd striktrøje, ja det må gerne være en du selv har strikket, et par light washed jeans og nogle støvler med lidt hæl på, det går man ikke galt med. Så kan du adde dit eget personlige præg med accessories, øreringe, et bælte og armbånd. And a hand full of rings!"
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "okayokayokay, hvis ikke solen kan skinne, så må vi, vi snakker metallic, glitter og hæle! tilføj gerne et par smykker også! ", 
                 "classy": "Vejret er gråt, men det behøver vi ikke være, så vælg din yndlings farverige trøje, et par sorte bukser og nogle sko med pang. kør gerne nogle smykker der har kontrast til hvad end trøje du vælger - stand out! (det er ikke bare en fetmule sang) "
             }
@@ -69,29 +69,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor? Hun vil sikkert gerne være med til at bestemme, hvad du skal have på.", 
                 "classy": "fuck paraplyer, en cap kan gøre arbejdet næsten lige så godt, og så ser det meget bedre ud."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her. og Gummistøvler, de ankler skal også dækkes!", 
                 "classy": "Det er det perfekte tidspunkt til at have en gul regnjakke på. har du røde gummistøvler også? og.. hvis du tilfældigvis har adgang til en rød ballon.."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. En stor og dækkende regnjakke er en god ide her.", 
                 "classy": "polkaprikker. det er hvad der er behov for i sådan et vejr. der skal altid være lidt whimsy i ens liv. ekstra points hvis prikkerne lidt får dig til at ligne en mariehøne."
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "Well.. people are already wet.. might as well make it dripping. løs hvid skjorte, og du lader en del af knapperne stå åbent. og hvilken dag er bedre til at afprøve lidt smokey eye? hvis regnen rammer så bliver det jo bare mere smokey. win win.", 
                 "classy": "en polo fungerer helt fint til vejret, og gerne i nogle earthy tones eller mørkegrøn. hvis det skal regne kan vvi lige så godt fejre at planterne i det mindste er glade."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "bar hud tørrer hurtigere end tøj, så en kjole eller et miniskirt med high knee boots. fuck regnjakken og paraplyen, wet is hot.", 
                 "classy": "En kjole i jordtoner, med statement smykker og en elegant regnfrakke, som fremhæver din talje - og husk at synge i regnen! det bedste du kan have på er en idc attitude."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "drip, drip, drip. slick back wet hair look, skjorte med dyb V, og en lang frakke. har du combat boots? for det burde du.", 
                 "classy": "Bare lad vær med at forlade dit hjem.. og hvis du absolut insisterer, så kan du medbringe en paraply.."
             }
@@ -102,29 +102,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor?", 
                 "classy": "Uh! snevejr! find det varme tøj frem, for der er jo ikke nogen der kommer til at ligge mærke til, præcis hvad du har på, når du har travlt med at vinde i sneboldskamp."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her. Og en stor tyk sweather som din mormor har strikket.", 
                 "classy": "yay! ud og give folk vaskere og kælke! men det er her du skal huske hyggesokkerne og hanskerne, og ja, hansker kan være cute, men når det kommer til at lege i sne, så er comfort og det praktiske simpelthen vigtigere end stil."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. flyverdragt hele vejen!", 
                 "classy": "Husk huen og hanskerne og altid et ekstra par sokker på inden du bevæger dig udenfor! men lad vær med at tænke over, hvad du skal have på idag, så længe det er meget tøj, så er det ligegyldigt hvilket tøj."
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "Det er ikke vejret til shorts, i repeat: NO SHORTS! jeg ved godt du gerne vil vise hud, men tiden er simpelthen ikke til det.", 
                 "classy": "Layers, layers, layers. og bare fordi du ikke længere har din mor til at sige at du skal huske et halstørklæde, for ellers bliver du syg... så betyder det ikke at det ikke er rigtigt! HUSK DIT HALSTØRKLÆDE!"
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "Så, vejret er nok ikke til at vise så meget hud, men hæle kan altså være smart, når det er glat udenfor, de griber bare bedre fast i grunden under dig!", 
                 "classy": "Du kommer til at falde. det sker. you know it, i know it. for the love of god, TAG FLERE LAG PÅ. bare accepter din skæbne."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "Be slutty another day.. helt ærligt. bare giv op idag.", 
                 "classy": "Royal bukser anybody? hvis du stadig ejer et par, så er det på tide du tager dem frem igen, for kan du huske hvor sygt gode de var til at holde varme!?"
             }
@@ -135,29 +135,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor? Der er alligevel ingen der kan se dig i den her tåge, så pak dig selv ind!", 
                 "classy": "dude, really.. ingen kan se dig. selv hvis du går med briller, så er de irrelevante idag. who cares. be blind for the day (hvis din mor siger det er okay.. selvfølgelig)."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her. Ingen kan se det alligevel, jordskyerne har overtaget.", 
                 "classy": "Siden ingen rigtigt kan se hvad du har på, så er det en oplagt mulighed for at gå fuld politisk! tag dit mest offensive tøj på, og hvis folk bliver forargede over det, så stod de nok alligevel for tæt på dig til at starte med."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. Du er usynlig i tågen alligevel, så du kan lige så godt have massevis af tøj på.", 
                 "classy": "child, you do you. brug dagen til at tage det outfit på, som du har overvejet længe, men ikke helt ved om du can pull off, for folk kan alligevel ikke se noget, det er det perfekte tidspunkt at teste det på."
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "er det tiden til at afprøve hvor få knapper i en skjorte som kan gå an? ja det tænker jeg det er. hvis de overhoved kan se dig, så er det nok fordi de ikke havde noget imod at være tæt på dig til at starte med.", 
                 "classy": "Honestly, why even try. this is not the day. hoodie and sweats."
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "Ingen kan se dig, så du kan tage så meget eller så lidt tøj på, som du har lyst til (INDENFOR LOVENS GRÆNSER!)", 
                 "classy": "if you wanna look cute for you, then fine, men altså, hvis du ikke gider bruge energi på det, så er idag dagen. jogging bukser og hoodie."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "så, er det dagen til at afprøve latex? yeah why the hell not. vil det være ubehageligt i tågen? ja, helt sikkert. men har du så fundet ud af om du er typen der kan holde latex ud? også ja!", 
                 "classy": "this is a you day. jogging tøj, et jumpsuit, whatever floats your boat. nobody is gonna care."
             }
@@ -168,29 +168,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor? For det kan vi altså godt gøre.", 
                 "classy": "er Woody din yndlings, for nu er et godt tidspunkt at afprøve hans stil. (eller, why not, go buzz i stedet for, ikke lad dem vide hvad de skal forvente af dig!)"
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her. Dune looket er in, og de er virkelig pakket ind!", 
                 "classy": "vælg nogle løse og flavrende bukser i støvede farver og så kører vi bare løst og behageligt hele dagen."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. Dune looket er in, og de er virkelig pakket ind!", 
                 "classy": "khaki bukser og en let jakke. man vil helst ikke have noget alt for stramt eller trælst på."
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "think cowboy. for det er vibet for idag. cowboyhat, dusty jeans og hvis du har støvlerne.. then yes please.", 
                 "classy": "det er tidspunktet til en hat. det er nu. og vær ærlig, har du ikke altid gerne lidt ville ligne indiana jones? "
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "sexy mummy, just.. without being dead. nude colors og ting der er flowy, så du rigtig kan misbruge vejret. det kan blive dit helt eget photoshoot.", 
                 "classy": "Tænk Padme i star wars. honestly, hvad end af hendes outfits. men hvis du gerne vil have noget specifikt, så tænk på hendes two piece outfit hun havde på da hun var på Tatooine. Det giver desert queen! "
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "cowboyhat og en vest. har du brug for mere? not really. burde du alligevel nok tilføje nogle bukser eller noget.. ja, det burde du nok.", 
                 "classy": "Gør vi Dune? ja det gør vi. Kan vi finde en kappe? forhåbenligt. og accessories!? mange af dem!"
             }
@@ -201,29 +201,29 @@
     "background": "",
     "descriptions": {
         "barn": {
-            "mand": {
+            "male": {
                 "slutty": "dude.. er du okay? skal vi ringe til din mor? Desuden så burde du ikke være udenfor i en storm anyway, dine forældre bliver bare bekymret. Bliv hjemme med pyjamas på.", 
                 "classy": "nonononononononononononono. hvad i alverden laver du på en app???? har du ikke bedre ting at tænke på lige nu?????"
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "girl.. find noget hello kitty i stedet for det her. Og du burde slet ikke være udenfor i det her vejr. Pyjamas vejr er hvad det er for dig.", 
                 "classy": "girl seriøst? er det virkelig hvad der er vigtigst lige nu???? at tjekke en app!? girl nah! just... no."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "aj.. genovervej lige dine valg i livet. No way at du skal ud blandt mennesker i dette vejr, så på med heldækkende pyjamas og se en disney film mens det stormer.", 
                 "classy": "Hvad i alverden har du gang i? burde du ikke have bedre ting at tage dig til lige nu?? gå ind og spør dine forældre om de har brug for hjælp til at klargøre noget!"
             }
         },
         "voksen":{
-            "mand": {
+            "male": {
                 "slutty": "Trashy is the way to go. tøj der er ødelagt og med massevis af huller. put voks i håret og lad vejret style det for dig. ", 
                 "classy": "Dude, du kan tage hvad som helst på, det kommer ikke til at gøre en forskel.. men måske shorts?"
             }, 
-            "kvinde": {
+            "female": {
                 "slutty": "Det er tid til det mest eratiske look du har gemt på. go full ke$ha!, det går nok i stykker alligevel i det her vejr..", 
                 "classy": "Ingen nederdel eller kjoler, i hvert fald ikke uden shorts under! og måske drop paraplyen.. den flyver alligevel bare væk."
             }, 
-            "ved ikke": {
+            "other": {
                 "slutty": "lad dit indre crazy tage over! har du ikke nogen gange bare lidt lyst til at skrige into the void? well.. today you can look like it. wear whatever your inner cray feels like!", 
                 "classy": "Hvad end du vælger, efterlad paraplyen derhjemme."
             }
