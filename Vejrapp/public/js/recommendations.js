@@ -25,7 +25,7 @@ async function getClothingRecommendations() {
       throw new Error("Serveren returnerede ikke noget tøjråd.");
     }
 
-    if (request === latestClothingRequest) adviceText.textContent = clothingData.recommendation;
+    if (request === latestClothingRequest) adviceText.innerHTML = clothingData.recommendation;
   } catch (error) {
     if (request === latestClothingRequest) adviceText.textContent = error.message;
   }

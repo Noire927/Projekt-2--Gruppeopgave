@@ -22,10 +22,20 @@ const weatherFile = path.join(
   "data",
   "weather.json",
 );
+const dislikeMessagesFile = path.join(
+  __dirname,
+  "..",
+  "Vejrapp",
+  "data",
+  "dislike-messages.json",
+);
 
 // Load user data and weather data from the JSON files
 const users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
 const weather = JSON.parse(fs.readFileSync(weatherFile, "utf8"));
+const dislikeMessages = JSON.parse(
+  fs.readFileSync(dislikeMessagesFile, "utf8"),
+);
 
 // Create the user manager
 const userManager = new UserManager(users, usersFile);
@@ -314,22 +324,6 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // Check if the user is logged in
-    if (token && authentication.verifyToken(token)) {
-      // Get the user associated with the login token
-      const userId = authentication.getUserId(token);
-      const user = userManager.findById(userId);
-
-      // Get the user's saved preferences
-      if (user && user.preferences) {
-        preferences = {
-          ageGroup: user.preferences.ageGroup || "voksen",
-          gender: user.preferences.gender || "ved ikke",
-          style: user.preferences.style || "classy",
-        };
-      }
-    }
-
     // Get the city from the URL
     const url = new URL(req.url, `http://${req.headers.host}`);
     const city = url.searchParams.get("city");
@@ -422,43 +416,14 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      // Give clothing IDs readable names
-      const clothingNames = {
-        "pants-1": "bukser",
-        "sweater-1": "trøjer",
-        "jacket-1": "jakker",
-        "shoes-1": "sko",
-        "hat-1": "huer",
-      };
-
-      // Find the names of liked and disliked clothes
-      const likedClothes = (preferences.likedClothes || [])
-        .map((item) => clothingNames[item])
-        .filter(Boolean);
-
-      const dislikedClothes = (preferences.dislikedClothes || [])
-        .map((item) => clothingNames[item])
-        .filter(Boolean);
-
-      // Create a personalised note
-      let personalizedNote = "";
-
-      if (likedClothes.length > 0) {
-        personalizedNote +=
-          "Du kan overveje at bruge noget af det tøj, du har liket: " +
-          likedClothes.join(", ") +
-          ". ";
-      }
-
-      if (dislikedClothes.length > 0) {
-        personalizedNote +=
-          "Vi tager hensyn til dit fravalg af: " +
-          dislikedClothes.join(", ") +
-          ".";
-      }
-
-      // Combine the original recommendation with the personalised note
-      const finalRecommendation = recommendation + " " + personalizedNote;
+      // Append only messages for clothes the user disliked.
+      const personalizedNote = (preferences.dislikedClothes || [])
+        .map((item) => dislikeMessages[item])
+        .filter(Boolean)
+        .join(" ");
+      const finalRecommendation = personalizedNote
+        ? recommendation + "<br><br>" + personalizedNote
+        : recommendation;
 
       // Return the clothing recommendation
       res.writeHead(200, {
