@@ -34,7 +34,29 @@ authForm.addEventListener("submit", async function (event) {
     }
 
     sessionStorage.setItem("token", data.token);
-    window.location.href = authForm.dataset.next;
+    const preferencesResponse = await fetch("/api/preferences", {
+      headers: { Authorization: "Bearer " + data.token },
+    });
+    if (preferencesResponse.status === 401) {
+      sessionStorage.removeItem("token");
+      window.location.href = "login-form.html";
+      return;
+    }
+    const preferences = await preferencesResponse.json();
+    if (!preferencesResponse.ok) {
+      throw new Error(typeof preferences?.error === "string"
+        ? preferences.error : "Kunne ikke hente dine præferencer.");
+    }
+
+    const completeProfile = ["barn", "voksen"].includes(preferences?.ageGroup)
+      && ["male", "female", "other"].includes(preferences?.gender)
+      && ["classy", "slutty"].includes(preferences?.style);
+    if (!completeProfile) {
+      window.location.href = authForm.dataset.next;
+      return;
+    }
+    window.location.href = preferences.ageGroup === "barn"
+      ? "weather-child.html" : "weather-adult.html";
   } catch (error) {
     authMessage.textContent = error.message;
   } finally {

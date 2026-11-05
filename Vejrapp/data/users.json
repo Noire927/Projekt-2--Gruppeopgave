@@ -8,5 +8,15 @@
       "gender": "male",
       "style": "classy"
     }
+  },
+  {
+    "id": 2,
+    "email": "baby@baby.com",
+    "password": "1234567890",
+    "preferences": {
+      "ageGroup": "barn",
+      "gender": "other",
+      "style": "classy"
+    }
   }
 ]

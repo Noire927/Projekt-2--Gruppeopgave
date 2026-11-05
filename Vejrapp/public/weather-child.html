@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vejret - Klædt på</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/child.css">
 </head>
+
 <body>
     <main class="screen screen--child">
         <header class="header">
@@ -17,15 +21,17 @@
         </header>
         <form class="search js-search-form" role="search">
             <label class="visually-hidden" for="city-input">Søg efter by</label>
-            <input class="search__input" id="city-input" name="city" type="search" placeholder="Søg efter by" autocomplete="off">
-            <button class="search__locate js-locate" id="locate-button" type="button"><span aria-hidden="true">📍</span> Find mig</button>
+            <input class="search__input" id="city-input" name="city" type="search" placeholder="Søg efter by"
+                autocomplete="off">
+            <button class="search__locate js-locate" id="locate-button" type="button"><span aria-hidden="true">📍</span>
+                Find mig</button>
         </form>
         <p id="weather-message" role="status"></p>
-        <p class="greeting" id="greeting">Det er sol og regnbuer udenfor!</p>
         <section class="banner" aria-live="polite" aria-label="Vejret nu">
-            <img class="banner__image" id="weather-image" src="images/child-weather-sunny.jpg" alt="Tegning af sol og regnbue" width="430" height="240">
+            <img class="banner__image" id="weather-image" src="images/child-weather-sunny.jpg"
+                alt="Tegning af sol og regnbue" width="430" height="240">
             <p class="banner__pill">
-                <strong id="city-name">Odense</strong> 
+                <strong id="city-name">Odense</strong>
                 <span><span id="temperature">—</span> °C</span>
                 <span id="condition">Solrig</span>
             </p>
@@ -46,7 +52,8 @@
         </ul>
         <section class="outfit" aria-label="Dagens outfit">
             <h2 class="outfit__title">Dagens outfit</h2>
-            <img class="outfit__image" id="outfit-image" src="images/child-outfit-sunny.png" alt="Tegnefilmsfigur med propelhat, t-shirt og shorts" width="260" height="347">
+            <img class="outfit__image" id="outfit-image" src="images/child-outfit-sunny.png"
+                alt="Tegnefilmsfigur med propelhat, t-shirt og shorts" width="260" height="347">
             <p class="outfit__text" id="advice-text">T-shirt og shorts. Husk solcreme!</p>
         </section>
         <section class="forecast" aria-label="Vejrudsigt">
@@ -68,7 +75,8 @@
             </template>
         </section>
     </main>
-<script src="js/weather.js" defer></script>
-<script src="js/recommendations.js" defer></script>
+    <script src="js/weather.js" defer></script>
+    <script src="js/recommendations.js" defer></script>
 </body>
+
 </html>
