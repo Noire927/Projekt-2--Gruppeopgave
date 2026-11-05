@@ -20,6 +20,7 @@
             <input class="search__input" id="city-input" name="city" type="search" placeholder="Søg efter by" autocomplete="off">
             <button class="search__locate js-locate" id="locate-button" type="button"><span aria-hidden="true">📍</span> Find mig</button>
         </form>
+        <p id="weather-message" role="status"></p>
         <section class="current" aria-live="polite" aria-label="Vejret nu">
             <img class="current__image" id="weather-image" src="images/weather-sunny.jpg" alt="Tegning af solen" width="180" height="180">
             <div class="current__info">
@@ -42,8 +43,9 @@
             <input class="forecast__radio" type="radio" name="forecast-view" id="view-hourly">
             <div class="forecast__tabs">
                 <label class="forecast__tab" for="view-daily">5-dages prognose</label>
-                <label class="forecast__tab" for="view-hourly">Time for time</label>
+                <label class="forecast__tab" for="view-hourly">Hver 3. time</label>
             </div>
+            <p id="forecast-message" role="status"></p>
             <ul class="forecast__list forecast__list--daily" id="forecast-daily">
                 <li class="forecast__item">
                     <span class="forecast__day">Onsdag 4.11</span>
@@ -105,6 +107,7 @@
             </ul>
         </section>
     </main>
-<script src="js/demo.js" defer></script>
+<script src="js/weather.js" defer></script>
+<script src="js/recommendations.js" defer></script>
 </body>
 </html>

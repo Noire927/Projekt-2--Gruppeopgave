@@ -13,7 +13,7 @@
     <main class="screen screen--start">
         <a class="back-link" href="login.html">‹ Tilbage</a>
         <h1 class="title">Opret bruger</h1>
-        <form class="form js-signup-form" id="signup-form" method="post" action="/api/signup" data-next="profile.html">
+        <form class="form js-signup-form" id="signup-form" method="post" action="/api/register" data-next="profile.html">
             <div class="form__field">
                 <label class="form__label" for="name">Navn</label>
                 <input class="form__input" id="name" name="name" type="text" autocomplete="given-name" required>
@@ -26,10 +26,11 @@
                 <label class="form__label" for="password">Kodeord</label>
                 <input class="form__input" id="password" name="password" type="password" autocomplete="new-password" minlength="8" required>
             </div>
+            <p id="auth-message" role="alert"></p>
             <button class="button" type="submit">Næste</button>
         </form>
         <a class="link" href="login-form.html">Har du allerede en bruger? Log ind</a>
     </main>
-<script src="js/demo.js" defer></script>
+<script src="js/authentication.js" defer></script>
 </body>
 </html>

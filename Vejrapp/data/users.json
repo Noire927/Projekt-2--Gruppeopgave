@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": 1,
+    "email": "nestor.kulik@gmail.com",
+    "password": "dkfmskfmsdfmsd",
+    "preferences": {
+      "ageGroup": "voksen",
+      "gender": "male",
+      "style": "classy"
+    }
+  }
+]
