@@ -259,7 +259,7 @@ fieldset{
     background:#fff0ee;
     color:var(--color-ink)
 }
-.tags:has(.tags__input:checked~.tags__input:checked~.tags__input:checked) .tags__input:checked+.tags__label{
+.tags:not(:has(.tags__input:checked~.tags__input:checked)) .tags__input:checked+.tags__label{
     border-color:var(--color-green);
     background:var(--color-green-soft);
     color:var(--color-green)
