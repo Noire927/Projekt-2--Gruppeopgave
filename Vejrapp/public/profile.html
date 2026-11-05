@@ -13,7 +13,7 @@
     <main class="screen screen--start">
         <a class="back-link" href="signup.html">‹ Tilbage</a>
         <h1 class="title">Velkommen <span class="js-user-name">[NAVN]</span> til Klædt på</h1>
-        <form class="form profile js-profile-form" id="profile-form" method="post" action="/api/profile" data-next-adult="clothing-adult.html" data-next-child="clothing-child.html">
+        <form class="form profile js-profile-form" id="profile-form" method="post" action="/api/preferences" data-next-adult="clothing-adult.html" data-next-child="clothing-child.html">
             <div class="form__field">
                 <label class="form__label" for="age">Hvor gammel er du?</label>
                 <input class="form__input js-age" id="age" name="age" type="number" inputmode="numeric" min="3" max="120" placeholder="Alder" required>
@@ -38,9 +38,10 @@
                     <label class="tags__label" for="style-classy">Classy</label>
                 </div>
             </fieldset>
-            <button class="button button--next js-next" type="submit" disabled>Næste</button>
+            <p id="profile-message" role="alert"></p>
+            <button class="button button--next js-next" type="submit">Næste</button>
         </form>
     </main>
-<script src="js/demo.js" defer></script>
+<script src="js/profile.js" defer></script>
 </body>
 </html>
