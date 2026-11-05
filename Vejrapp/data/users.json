@@ -1,13 +1,12 @@
 [
   {
     "id": 1,
-    "email": "test@example.com",
-    "password": "test123",
+    "email": "nestor.kulik@gmail.com",
+    "password": "dkfmskfmsdfmsd",
     "preferences": {
       "ageGroup": "voksen",
-      "gender": "mand",
-      "style": "classy",
-      "preferredLocation": "Sonderborg"
+      "gender": "male",
+      "style": "classy"
     }
   }
 ]

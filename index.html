@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather and clothing · Get dressed</title>
+  <script src="js/elements.js" defer></script>
+  <script src="js/base.js" defer></script>
+  <script src="js/clothing.js" defer></script>
+  <script src="js/preferences.js" defer></script>
+  <script src="js/weather.js" defer></script>
+  <script src="js/location.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Get dressed</h1>
+    <button id="replace_this_id_with_real_id_preferences_button" type="button" aria-label="Open preferences"
+      aria-haspopup="dialog">
+      Preferences
+    </button>
+  </header>
+  <main>
+    <p id="replace_this_id_with_real_id_message" role="status"></p>
+    <form id="replace_this_id_with_real_id_city_form">
+      <label for="replace_this_id_with_real_id_city_input">Search for a city</label>
+      <input id="replace_this_id_with_real_id_city_input" type="search" placeholder="Search for a city" minlength="2"
+        enterkeyhint="search" required>
+      <button id="replace_this_id_with_real_id_location_button" type="button"><span aria-hidden="true">⊕</span> Use my location</button>
+    </form>
+    <p id="replace_this_id_with_real_id_location_message" role="status"></p>
+    <ul id="replace_this_id_with_real_id_city_results" aria-label="Matching cities"></ul>
+    <p id="replace_this_id_with_real_id_weather_message" role="status"></p>
+    <button id="replace_this_id_with_real_id_retry_weather_button" type="button" hidden>Try again</button>
+
+    <section id="replace_this_id_with_real_id_weather_panel" hidden aria-label="Weather and clothing advice">
+      <div>
+        <img id="replace_this_id_with_real_id_weather_icon" src="icons/sun.svg" width="190" height="190" alt="">
+        <div>
+          <h2 id="replace_this_id_with_real_id_city_name"></h2>
+          <p id="replace_this_id_with_real_id_temperature"></p>
+          <p id="replace_this_id_with_real_id_conditions"></p>
+          <p><span id="replace_this_id_with_real_id_wind"></span><br><span
+              id="replace_this_id_with_real_id_wind_speed"></span></p>
+          <p id="replace_this_id_with_real_id_rain"></p>
+        </div>
+      </div>
+
+      <section aria-labelledby="clothing-heading">
+        <h2 id="clothing-heading">What should I wear?</h2>
+        <p id="replace_this_id_with_real_id_clothing_advice"></p>
+        <p id="replace_this_id_with_real_id_clothing_extras"></p>
+      </section>
+
+      <section aria-labelledby="forecast-heading">
+        <h2 id="forecast-heading">Forecast</h2>
+        <div role="group" aria-label="Choose a forecast">
+          <button id="replace_this_id_with_real_id_daily_button" type="button" aria-pressed="true"
+            aria-controls="replace_this_id_with_real_id_daily_panel">7-day forecast</button>
+          <button id="replace_this_id_with_real_id_hourly_button" type="button" aria-pressed="false"
+            aria-controls="replace_this_id_with_real_id_hourly_panel">Hourly forecast</button>
+        </div>
+        <p>Daily temperatures are the maximum for each day. Times are local to the selected city.</p>
+        <div id="replace_this_id_with_real_id_daily_panel">
+          <ul id="replace_this_id_with_real_id_daily_list" aria-label="The next seven days"></ul>
+        </div>
+        <div id="replace_this_id_with_real_id_hourly_panel" hidden>
+          <ul id="replace_this_id_with_real_id_hourly_list" aria-label="Every hour today"></ul>
+        </div>
+        <p id="replace_this_id_with_real_id_forecast_message" role="status"></p>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="replace_this_id_with_real_id_preferences_drawer" aria-labelledby="preferences-heading">
+    <div>
+      <h2 id="preferences-heading">Preferences</h2>
+      <button id="replace_this_id_with_real_id_close_preferences_button" type="button"
+        aria-label="Close preferences">✕</button>
+    </div>
+    <p id="replace_this_id_with_real_id_preferences_message" role="status"></p>
+    <form id="replace_this_id_with_real_id_preferences_form">
+      <p><label for="replace_this_id_with_real_id_age_group_select">Clothes for</label>
+        <select id="replace_this_id_with_real_id_age_group_select">
+          <option value="adult">An adult</option>
+          <option value="child">A child</option>
+        </select>
+      </p>
+      <p><label for="replace_this_id_with_real_id_sensitivity_select">How does the temperature feel to you?</label>
+        <select id="replace_this_id_with_real_id_sensitivity_select">
+          <option value="comfortable">Usually comfortable</option>
+          <option value="cold">I feel cold easily</option>
+          <option value="warm">I feel warm easily</option>
+        </select>
+      </p>
+      <p>Preferred city: <span id="replace_this_id_with_real_id_preferred_city">Aarhus</span>.
+        Choose another city on the home page.</p>
+      <details>
+        <summary>Choose clothes you like</summary>
+        <p>Optional: say yes or no to each item, or keep the general recommendations.</p>
+        <p id="replace_this_id_with_real_id_clothing_card" aria-live="polite"></p>
+        <div id="replace_this_id_with_real_id_card_buttons">
+          <button id="replace_this_id_with_real_id_like_button" type="button">Yes</button>
+          <button id="replace_this_id_with_real_id_dislike_button" type="button">No</button>
+          <button id="replace_this_id_with_real_id_skip_card_button" type="button">Skip</button>
+        </div>
+      </details>
+      <button id="replace_this_id_with_real_id_save_button" type="submit">Save preferences</button>
+    </form>
+  </dialog>
+  <footer><a href="https://open-meteo.com/">Weather from Open-Meteo</a> ·
+    <a href="https://www.geonames.org/">Cities from GeoNames</a>
+  </footer>
+</body>
+
+</html>

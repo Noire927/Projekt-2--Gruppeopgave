@@ -1,102 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="da">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Om dig - Klædt på</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/base.css" />
-  </head>
-  <body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
     <main class="screen screen--start">
-      <a class="back-link" href="signup.html">‹ Tilbage</a>
-      <h1 class="title">
-        Velkommen <span class="js-user-name">[NAVN]</span> til Klædt på
-      </h1>
-      <form
-        class="form profile js-profile-form"
-        id="profile-form"
-        method="post"
-        action="/api/profile"
-        data-next-adult="clothing-adult.html"
-        data-next-child="clothing-child.html"
-      >
-        <div class="form__field">
-          <label class="form__label" for="age">Hvor gammel er du?</label>
-          <input
-            class="form__input js-age"
-            id="age"
-            name="age"
-            type="number"
-            inputmode="numeric"
-            min="3"
-            max="120"
-            placeholder="Alder"
-            required
-          />
-        </div>
-        <fieldset class="choice">
-          <legend class="choice__legend">Køn</legend>
-          <div class="choice__options">
-            <input
-              class="choice__input js-gender"
-              type="radio"
-              id="gender-male"
-              name="gender"
-              value="male"
-              required
-            />
-            <label class="choice__label" for="gender-male">Mand</label>
-            <input
-              class="choice__input js-gender"
-              type="radio"
-              id="gender-female"
-              name="gender"
-              value="female"
-            />
-            <label class="choice__label" for="gender-female">Kvinde</label>
-            <input
-              class="choice__input js-gender"
-              type="radio"
-              id="gender-other"
-              name="gender"
-              value="other"
-            />
-            <label class="choice__label" for="gender-other">Andet</label>
-          </div>
-        </fieldset>
-        <fieldset class="profile__tags">
-          <legend class="profile__tags-title">Vælg din stil:</legend>
-          <div class="tags">
-            <input
-              class="tags__input"
-              type="radio"
-              id="style-slutty"
-              name="style"
-              value="slutty"
-              required
-            />
-            <label class="tags__label" for="style-slutty">Slutty</label>
-            <input
-              class="tags__input"
-              type="radio"
-              id="style-classy"
-              name="style"
-              value="classy"
-              required
-            />
-            <label class="tags__label" for="style-classy">Classy</label>
-          </div>
-        </fieldset>
-        <button class="button button--next js-next" type="submit" disabled>
-          Næste
-        </button>
-      </form>
+        <a class="back-link" href="signup.html">‹ Tilbage</a>
+        <h1 class="title">Velkommen <span class="js-user-name">[NAVN]</span> til Klædt på</h1>
+        <form class="form profile js-profile-form" id="profile-form" method="post" action="/api/preferences" data-next-adult="clothing-adult.html" data-next-child="clothing-child.html">
+            <div class="form__field">
+                <label class="form__label" for="age">Hvor gammel er du?</label>
+                <input class="form__input js-age" id="age" name="age" type="number" inputmode="numeric" min="3" max="120" placeholder="Alder" required>
+            </div>
+            <fieldset class="choice">
+                <legend class="choice__legend">Køn</legend>
+                <div class="choice__options">
+                    <input class="choice__input js-gender" type="radio" id="gender-male" name="gender" value="male" required>
+                    <label class="choice__label" for="gender-male">Mand</label>
+                    <input class="choice__input js-gender" type="radio" id="gender-female" name="gender" value="female">
+                    <label class="choice__label" for="gender-female">Kvinde</label>
+                    <input class="choice__input js-gender" type="radio" id="gender-other" name="gender" value="other">
+                    <label class="choice__label" for="gender-other">Andet</label>
+                </div>
+            </fieldset>
+            <fieldset class="profile__tags">
+                <legend class="profile__tags-title">Vælg din stil:</legend>
+                <div class="tags">
+                    <input class="tags__input" type="radio" id="style-slutty" name="style" value="slutty" required>
+                    <label class="tags__label" for="style-slutty">Slutty</label>
+                    <input class="tags__input" type="radio" id="style-classy" name="style" value="classy" required>
+                    <label class="tags__label" for="style-classy">Classy</label>
+                </div>
+            </fieldset>
+            <p id="profile-message" role="alert"></p>
+            <button class="button button--next js-next" type="submit">Næste</button>
+        </form>
     </main>
-  </body>
+<script src="js/profile.js" defer></script>
+</body>
 </html>
