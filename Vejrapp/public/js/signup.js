@@ -25,6 +25,6 @@ signupForm.addEventListener("submit", async function (event) {
 
     window.location.href = signupForm.dataset.next;
   } catch (error) {
-    alert(error.message || "Something went wrong during registration.");
+    alert(error.message || "Der gik noget galt under registreringen");
   }
 });

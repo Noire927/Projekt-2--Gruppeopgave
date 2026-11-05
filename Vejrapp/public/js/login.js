@@ -29,6 +29,6 @@ loginForm.addEventListener("submit", async function (event) {
 
     window.location.href = loginForm.dataset.next;
   } catch (error) {
-    alert(error.message || "Login failed.");
+    alert(error.message || "Login mislykkedes.");
   }
 });

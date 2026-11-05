@@ -50,7 +50,7 @@ async function saveClothingPreferences() {
   });
 
   if (!getResponse.ok) {
-    throw new Error("Could not load user preferences.");
+    throw new Error("Kunne ikke hente dine præferencer.");
   }
 
   const existingPreferences = await getResponse.json();
@@ -72,7 +72,7 @@ async function saveClothingPreferences() {
   });
 
   if (!saveResponse.ok) {
-    throw new Error("Could not save clothing preferences.");
+    throw new Error("Kunne ikke gemme dine præferencer.");
   }
 }
 
